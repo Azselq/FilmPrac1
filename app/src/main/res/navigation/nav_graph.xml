@@ -7,7 +7,21 @@
 
     <fragment
         android:id="@+id/baseFragment"
-        android:name="com.example.filmprac.View.BaseFragment"
+        android:name="com.example.filmprac.view.BaseFragment"
         android:label="fragment_base"
-        tools:layout="@layout/fragment_base" />
+        tools:layout="@layout/fragment_base" >
+        <action
+            android:id="@+id/action_baseFragment_to_nextFragment2"
+            app:destination="@id/nextFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/nextFragment"
+        android:name="com.example.filmprac.view.NextFragment"
+        android:label="fragment_next"
+        tools:layout="@layout/fragment_next">
+        <argument android:name="args" />
+        <action
+            android:id="@+id/action_nextFragment_to_baseFragment"
+            app:destination="@id/baseFragment" />
+    </fragment>
 </navigation>

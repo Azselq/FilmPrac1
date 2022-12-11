@@ -1,3 +1,6 @@
+package com.example.filmprac.response
+
+import com.example.filmprac.model.Films
 import com.google.gson.annotations.SerializedName
 
 /*
@@ -12,8 +15,8 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 For support, please feel free to contact me at https://www.linkedin.com/in/syedabsar */
 
 
-data class FilmList (
+data class FilmList(
 
-	@SerializedName("films") val films : List<Films>
+    @SerializedName("films") val films: List<Films>
 
 )

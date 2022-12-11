@@ -1,12 +1,14 @@
 package com.example.filmprac.rest
 
-import FilmList
+
+import com.example.filmprac.response.FilmList
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 class FilmRepository {
-    private val filmApi:FilmApi
+    private val filmApi: FilmApi
+
     init {
         val retrofit = Retrofit
             .Builder()
@@ -16,7 +18,7 @@ class FilmRepository {
         filmApi = retrofit.create(FilmApi::class.java)
     }
 
-    fun getInformation(): Call<FilmList>{
+    fun getInformation(): Call<FilmList> {
         return filmApi.getResult()
     }
 }

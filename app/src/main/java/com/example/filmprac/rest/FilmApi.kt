@@ -1,6 +1,7 @@
 package com.example.filmprac.rest
 
-import FilmList
+
+import com.example.filmprac.response.FilmList
 import retrofit2.Call
 import retrofit2.http.GET
 
