@@ -1,7 +1,6 @@
 package com.example.filmprac.view
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,7 +9,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import com.example.filmprac.R
 import com.example.filmprac.adapter.FilmAdapter
 import com.example.filmprac.databinding.FragmentBaseBinding
 import com.example.filmprac.viewModel.BaseViewModel
@@ -30,7 +28,6 @@ class BaseFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val bundle = Bundle()
         viewModel = ViewModelProvider(this).get(BaseViewModel::class.java)
         viewModel.printInformation()
         val recyclerView = binding.rcView
@@ -44,14 +41,9 @@ class BaseFragment : Fragment() {
             viewModel.openDetailFilm.collect {
                 when (it) {
                     is OpenDetailFilm.OpenNewFragment -> {
-                        val bundle = Bundle()
-                        bundle.putSerializable("films", it.films)
-                        Log.d("test", "$bundle")
-
-                        findNavController().navigate(
-                            R.id.action_baseFragment_to_nextFragment2,
-                            bundle
-                        )
+                        findNavController().navigate(BaseFragmentDirections.actionBaseFragmentToNextFragment2(
+                            it.films
+                        ))
                     }
                 }
             }

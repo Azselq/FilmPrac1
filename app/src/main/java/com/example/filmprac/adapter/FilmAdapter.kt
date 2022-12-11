@@ -25,12 +25,10 @@ class FilmAdapter(private val filmList: List<Films>) :
         val film = filmList[position]
         with(holder.binding) {
             tView.text = film.name
+            rootContainer.setOnClickListener { film.onClick() }
         }
-        val requestOptions = RequestOptions()
-        requestOptions.error(R.drawable.pig)
-        Glide.with(holder.binding.imView).setDefaultRequestOptions(requestOptions)
-            .load(film.image_url).into(holder.binding.imView)
-        holder.itemView.setOnClickListener { film.onClick() }
+        Glide.with(holder.binding.imView)
+            .load(film.image_url).error(R.drawable.pig).into(holder.binding.imView)
     }
 
     override fun getItemCount(): Int {

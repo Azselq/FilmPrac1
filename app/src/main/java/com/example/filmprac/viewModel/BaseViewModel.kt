@@ -28,8 +28,8 @@ class BaseViewModel : ViewModel() {
                 if (currentResponse != null) {
                     currentResponse.films.forEach {
                         it.onClick = { onItemClick(it) }
-                        filmListLiveData.value = currentResponse.films
                     }
+                    filmListLiveData.value = currentResponse.films
                     Log.d("test", "не пустой")
                 } else {
                     Log.d("test", "Пустой")
@@ -41,12 +41,12 @@ class BaseViewModel : ViewModel() {
                 Log.d("test", "Ошибка ", t)
             }
 
-            private fun onItemClick(films: Films) {
-                viewModelScope.launch {
-                    openDetailFilm.emit(OpenDetailFilm.OpenNewFragment(films))
-                }
-            }
         })
+    }
+    private fun onItemClick(films: Films) {
+        viewModelScope.launch {
+            openDetailFilm.emit(OpenDetailFilm.OpenNewFragment(films))
+        }
     }
 }
 

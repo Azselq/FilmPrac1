@@ -19,7 +19,9 @@
         android:name="com.example.filmprac.view.NextFragment"
         android:label="fragment_next"
         tools:layout="@layout/fragment_next">
-        <argument android:name="args" />
+        <argument
+            android:name="film"
+            app:argType="com.example.filmprac.model.Films"/>
         <action
             android:id="@+id/action_nextFragment_to_baseFragment"
             app:destination="@id/baseFragment" />
