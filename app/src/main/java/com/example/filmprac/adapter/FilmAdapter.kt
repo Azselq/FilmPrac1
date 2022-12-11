@@ -2,7 +2,6 @@ package com.example.filmprac.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
@@ -14,8 +13,7 @@ import com.example.filmprac.model.Films
 class FilmAdapter(private val filmList: List<Films>) :
     RecyclerView.Adapter<FilmAdapter.FilmHolder>() {
 
-    class FilmHolder(val binding: ItemFilmBinding) : RecyclerView.ViewHolder(binding.root) {
-    }
+    class FilmHolder(val binding: ItemFilmBinding) : RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FilmHolder {
         val view = LayoutInflater.from(parent.context)

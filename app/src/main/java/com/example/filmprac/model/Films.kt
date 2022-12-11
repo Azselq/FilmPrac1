@@ -24,6 +24,6 @@ data class Films(
     @SerializedName("image_url") val image_url: String,
     @SerializedName("description") val description: String,
     @SerializedName("genres") val genres: List<String>
-): java.io.Serializable{
-    var onClick:() -> Unit = {}
+) : java.io.Serializable {
+    var onClick: () -> Unit = {}
 }

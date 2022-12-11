@@ -26,8 +26,8 @@ class BaseViewModel : ViewModel() {
             override fun onResponse(call: Call<FilmList>, response: Response<FilmList>) {
                 val currentResponse = response.body()
                 if (currentResponse != null) {
-                    currentResponse.films.forEach{
-                        it.onClick = {onItemClick(it)}
+                    currentResponse.films.forEach {
+                        it.onClick = { onItemClick(it) }
                         filmListLiveData.value = currentResponse.films
                     }
                     Log.d("test", "не пустой")
@@ -49,7 +49,6 @@ class BaseViewModel : ViewModel() {
         })
     }
 }
-
 
 
 sealed class OpenDetailFilm {

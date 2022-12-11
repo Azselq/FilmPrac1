@@ -45,10 +45,13 @@ class BaseFragment : Fragment() {
                 when (it) {
                     is OpenDetailFilm.OpenNewFragment -> {
                         val bundle = Bundle()
-                        bundle.putSerializable("films",it.films)
-                        Log.d("test","$bundle")
+                        bundle.putSerializable("films", it.films)
+                        Log.d("test", "$bundle")
 
-                        findNavController().navigate(R.id.action_baseFragment_to_nextFragment2, bundle)
+                        findNavController().navigate(
+                            R.id.action_baseFragment_to_nextFragment2,
+                            bundle
+                        )
                     }
                 }
             }
