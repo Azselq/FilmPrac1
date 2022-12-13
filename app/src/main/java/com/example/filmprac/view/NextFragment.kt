@@ -17,7 +17,8 @@ import com.example.filmprac.viewModel.NextViewModel
 class NextFragment : Fragment() {
     lateinit var binding: FragmentNextBinding
     private val args: NextFragmentArgs by navArgs()
-        //get() = args.film
+    private val currentItem: Films
+        get() = args.film
 
     companion object {
         fun newInstance() = NextFragment()
@@ -37,16 +38,16 @@ class NextFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.tvTitle.text = args.film.localized_name.toString()
-        binding.tvYear.text = "Год: ${args.film.year}"
-        binding.tvRaiting.text = "Рейтинг: ${args.film.rating}"
-        binding.tvDescription.text = args.film.description.toString()
+        binding.tvYear.text = "Год: ${currentItem.year}"
+        binding.tvRaiting.text = "Рейтинг: ${currentItem.rating}"
+        binding.tvDescription.text = currentItem.description.toString()
         val requestOptions = RequestOptions()
         requestOptions.error(R.drawable.pig)
         Glide.with(binding.imPoster).setDefaultRequestOptions(requestOptions)
-            .load(args.film.image_url).error(R.drawable.pig).into(binding.imPoster)
+            .load(currentItem.image_url).error(R.drawable.pig).into(binding.imPoster)
         binding.imButton.setOnClickListener {
-            findNavController().navigate(R.id.action_nextFragment_to_baseFragment)
-            //activity?.onBackPressed()
+            //findNavController().navigate(R.id.action_nextFragment_to_baseFragment)
+            activity?.onBackPressed()
         }
     }
 

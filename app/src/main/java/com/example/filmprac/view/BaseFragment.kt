@@ -7,9 +7,11 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.FragmentNavigator
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.filmprac.adapter.FilmAdapter
+import com.example.filmprac.adapter.GenresAdapter
 import com.example.filmprac.databinding.FragmentBaseBinding
 import com.example.filmprac.viewModel.BaseViewModel
 import com.example.filmprac.viewModel.OpenDetailFilm
@@ -29,9 +31,14 @@ class BaseFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this).get(BaseViewModel::class.java)
-        viewModel.printInformation()
+        //viewModel.printInformation()
         val recyclerView = binding.rcView
         recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
+        val recyclerViewGenres = binding.rcGenres
+        recyclerViewGenres.layoutManager = GridLayoutManager(requireContext(),3)
+        viewModel.genresLiveData.observe(viewLifecycleOwner) {
+            recyclerViewGenres.adapter = GenresAdapter(it,viewLifecycleOwner)
+        }
 
         viewModel.filmListLiveData.observe(viewLifecycleOwner) {
             recyclerView.adapter = FilmAdapter(it)
@@ -41,9 +48,12 @@ class BaseFragment : Fragment() {
             viewModel.openDetailFilm.collect {
                 when (it) {
                     is OpenDetailFilm.OpenNewFragment -> {
-                        findNavController().navigate(BaseFragmentDirections.actionBaseFragmentToNextFragment2(
-                            it.films
-                        ))
+                        val navController = findNavController()
+                        if ((navController.currentDestination as? FragmentNavigator.Destination)?.className == this@BaseFragment.javaClass.name){
+                            navController.navigate(BaseFragmentDirections.actionBaseFragmentToNextFragment2(
+                                it.films
+                            ))
+                        }
                     }
                 }
             }
