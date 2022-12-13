@@ -35,9 +35,9 @@ class BaseFragment : Fragment() {
         val recyclerView = binding.rcView
         recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
         val recyclerViewGenres = binding.rcGenres
-        recyclerViewGenres.layoutManager = GridLayoutManager(requireContext(),3)
+        recyclerViewGenres.layoutManager = GridLayoutManager(requireContext(), 3)
         viewModel.genresLiveData.observe(viewLifecycleOwner) {
-            recyclerViewGenres.adapter = GenresAdapter(it,viewLifecycleOwner)
+            recyclerViewGenres.adapter = GenresAdapter(it, viewLifecycleOwner)
         }
 
         viewModel.filmListLiveData.observe(viewLifecycleOwner) {
@@ -49,10 +49,12 @@ class BaseFragment : Fragment() {
                 when (it) {
                     is OpenDetailFilm.OpenNewFragment -> {
                         val navController = findNavController()
-                        if ((navController.currentDestination as? FragmentNavigator.Destination)?.className == this@BaseFragment.javaClass.name){
-                            navController.navigate(BaseFragmentDirections.actionBaseFragmentToNextFragment2(
-                                it.films
-                            ))
+                        if ((navController.currentDestination as? FragmentNavigator.Destination)?.className == this@BaseFragment.javaClass.name) {
+                            navController.navigate(
+                                BaseFragmentDirections.actionBaseFragmentToNextFragment2(
+                                    it.films
+                                )
+                            )
                         }
                     }
                 }

@@ -24,11 +24,12 @@ class BaseViewModel : ViewModel() {
     val genresLiveData = MutableLiveData<List<Genre>>()
     var genresList = mutableListOf<String>()
     private val selectedGenre = mutableListOf<String>()
+
     init {
         kek()
     }
 
-    fun kek(){
+    fun kek() {
         printInformation()
     }
 
@@ -40,15 +41,15 @@ class BaseViewModel : ViewModel() {
                     currentResponse.films.forEach {
                         it.onClick = { onItemClick(it) }
 
-                        it.genres.forEach(){
-                            if(it !in genresList){
+                        it.genres.forEach {
+                            if (it !in genresList) {
                                 genresList.add(it)
                             }
                         }
 
 
                     }
-                    if(genresLiveData.value.isNullOrEmpty()) {
+                    if (genresLiveData.value.isNullOrEmpty()) {
                         val setOfGenre = genresList.map { it }.toSet().toMutableList()
                         genresLiveData.value = setOfGenre.map {
                             val isSelected = MutableLiveData(false)
@@ -71,7 +72,7 @@ class BaseViewModel : ViewModel() {
                     }
                     var changee2 = selectedGenre
                     Log.d("test", "Выбранно $changee2")
-                    Log.d("test","Все $genresList")
+                    Log.d("test", "Все $genresList")
                     var change = currentResponse.films.filter {
                         if (selectedGenre.isNotEmpty()) {
                             it.genres.toString().contains(selectedGenre.joinToString())
@@ -99,12 +100,6 @@ class BaseViewModel : ViewModel() {
 
         })
     }
-
-
-
-
-
-
 
 
     private fun onItemClick(films: Films) {
